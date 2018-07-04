@@ -1,0 +1,7 @@
+credentials.py
+*.pyc
+<<<<<<< HEAD
+/__pycache__
+=======
+/__pycache__
+>>>>>>> da24307eef14f7407dcd57f6231ea3975b03bebd
