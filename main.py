@@ -9,11 +9,16 @@ def authenticTweePy():
   api = tp.API(auth)
   return api
 
+def followFollowers(api):
+    for follower in tp.Cursor(api.followers).items():
+      print("Attempting to follow my followers")
+      follower.follow()
+
 
 def theTweeter(api):
   for tweet in tp.Cursor(api.search, q='#AI').items(1):
     try:
-        print('\nRetweet Bot found tweet by @' +tweet.user.screen_name + '. ' + 'Attempting toretweet.')
+        print('\nRetweet Bot found tweet by @' +tweet.user.screen_name + '. ' + 'Attempting to retweet.')
 
         tweet.retweet()
         print('Retweet published successfully.')
@@ -25,9 +30,9 @@ def theTweeter(api):
 
     except StopIteration:
         break
-    for follower in tp.Cursor(api.followers).items():
-      print("Attempting to follow my followers")
-      follower.follow()
+
+    #followFollowers(api)
+
     time.sleep(60)
 
 if __name__=='__main__':
