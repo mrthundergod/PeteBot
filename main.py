@@ -32,7 +32,7 @@ def theRetweeter(api, search):
 
     #followFollowers(api)
 
-    time.sleep(30)
+    time.sleep(60)
 
 def iterator(api):
     searchTerms=['#AI', '#ML', '#technology','#deeplearning','#machinelearning','#BigData','#IoT', '#artificialintelligence', '#robotics', '#internetofthings']
@@ -43,5 +43,7 @@ def iterator(api):
 if __name__=='__main__':
     api = authenticTweePy()
     for i in range(287):
-      iterator(api)
+        if i % 10:
+            time.sleep(300)
+        iterator(api)
     api.update_status(status="Reboot Pending")
