@@ -15,15 +15,14 @@ def followFollowers(api):
       follower.follow()
 
 
-def theTweeter(api):
-  for tweet in tp.Cursor(api.search, q='#AI').items(1):
+def theRetweeter(api, search):
+  for tweet in tp.Cursor(api.search, q=search).items(1):
     try:
         print('\nRetweet Bot found tweet by @' +tweet.user.screen_name + '. ' + 'Attempting to retweet.')
 
         tweet.retweet()
         print('Retweet published successfully.')
 
-      # Some basic error handling. Will print out why retweet failed, into your terminal.
     except tp.TweepError as error:
         print('\nError. Retweet not successful. Reason: ')
         print(error.reason)
@@ -33,10 +32,16 @@ def theTweeter(api):
 
     #followFollowers(api)
 
-    time.sleep(60)
+    time.sleep(30)
+
+def iterator(api):
+    searchTerms=['#AI', '#ML', '#technology','#deeplearning','#machinelearning','#BigData','#IoT', '#artificialintelligence', '#robotics', '#internetofthings']
+    for s in range(len(searchTerms)):
+        theRetweeter(api, searchTerms[s])
+
 
 if __name__=='__main__':
-  api = authenticTweePy()
-  theTweeter(api)
-
-#    https://python-twitter.readthedocs.io/en/latest/twitter.html#module-twitter.api
+    api = authenticTweePy()
+    for i in range(287):
+      iterator(api)
+    api.update_status(status="Reboot Pending")
